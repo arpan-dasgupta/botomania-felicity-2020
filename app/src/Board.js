@@ -8,22 +8,16 @@ export default class Board extends React.Component {
       squares: Array(100).fill(null),
       xIsNext: true,
     }
+    // testing purposes
+    for (let i = 0; i < 100; i++) {
+      this.state.squares[i] = Math.floor(Math.random()*3)
+    }
   }
 
-  handleClick = (i) => {
-    const squares = this.state.squares.slice();
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({
-      squares: squares,
-      xIsNext: !this.state.xIsNext,
-    });
-  }
-
-  renderSquare(i) {
+    renderSquare(i) {
     return (
       <Square 
         value={this.state.squares[i]}
-        onClick={() => this.handleClick(i)}
       />
     )
   }
@@ -45,8 +39,8 @@ export default class Board extends React.Component {
     }
 
     return (
-      <div>
-        <div className="status">{status}</div>
+      // <div className="status">{status}</div>
+      <div className="board">
         {board}
       </div>
     );

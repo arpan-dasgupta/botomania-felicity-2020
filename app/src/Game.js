@@ -5,7 +5,7 @@ import Board from './Board'
 export default class Game extends React.Component {
   render() {
     return (
-      <div className="game">
+      <section className="game">
         <div className="game-board">
           <Board />
         </div>
@@ -13,7 +13,7 @@ export default class Game extends React.Component {
           <div>{/* status */}</div>
           <ol>{/* TODO */}</ol>
         </div>
-      </div>
+      </section>
     );
   }
 }
