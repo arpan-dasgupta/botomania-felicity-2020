@@ -19,6 +19,17 @@ def introduction():
     """
     return render_template("introduction.html", topic="Introduction")
 
+
+@app.route("/test", methods=["GET"])
+def test():
+    """
+        Path: <root>/test
+        Methods: GET
+
+        For testing if the server is alive or not
+    """
+    return "Success"
+
 from app.game.controllers import mod_game
 
 app.register_blueprint(mod_game)
