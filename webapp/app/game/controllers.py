@@ -89,7 +89,7 @@ def get_status():
 
 # the D of CRUD
 @mod_game.route("/make_move", methods=["POST"])
-def delete_question(q_id):
+def make_move():
     """
         Path: <root>/game/make_move
 
