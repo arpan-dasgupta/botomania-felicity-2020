@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# basic utility checks
+[[ $(type -P http) ]] || { echo "Please install httpie"; exit 1; }
+[[ $(type -P curl) ]] || { echo "Please install curl"; exit 1; }
+
+# check if the server is up
+if [[ $( curl -s localhost:5000/test ) != "Success" ]]; then
+    echo "The server is not alive"
+    exit 1
+fi
+
+if (( $# < 1 )); then
+    echo "Usage: $0 <start|move|stat>"
+    exit 1;
+fi
+
+while (( $# > 0 )); do
+    case "$1" in
+        start )
+            http -f POST :5000/game/start p1=me p2=you ip1=127.0.0.1 ip2=127.0.0.1 board_size=10
+            shift ;;
+        move )
+            http -f POST :5000/game/make_move r_pos=0 c_pos=0
+            shift ;;
+        stat )
+            http -f GET :5000/game/get_status
+            shift ;;
+    esac
+done
