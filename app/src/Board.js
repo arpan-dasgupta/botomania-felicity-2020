@@ -4,10 +4,6 @@ import Square from './Square'
 export default class Board extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      squares: Array(100).fill(null),
-      xIsNext: true,
-    }
     // testing purposes
     for (let i = 0; i < 100; i++) {
       this.state.squares[i] = Math.floor(Math.random() * 3)
