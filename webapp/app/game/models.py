@@ -2,11 +2,12 @@
 This file contains db models for the game
 """
 
-from itertools import izip, islice
+from itertools import islice
 
 from flask_sqlalchemy import SQLAlchemy
 
 from app import db
+
 
 class Game(db.Model):
     """
@@ -52,14 +53,15 @@ class Game(db.Model):
         """
         rep = self.team1 + " vs " + self.team2 + "\n"
 
-        board = [ [ " " for i in range(self.board_size) ] for i in range(self.board_size) ]
+        board = [[" " for i in range(self.board_size)]
+                 for i in range(self.board_size)]
 
         rep += "Game:\n"
 
         # team1 starts the game
         team = 1
 
-        for (str_row, str_col) in izip(islice(self.moves, 0, None, 2), islice(self.moves, 1, None, 2)):
+        for (str_row, str_col) in zip(islice(self.moves, 0, None, 2), islice(self.moves, 1, None, 2)):
             row, col = self.get_index(str_row, str_col)
             board[row][col] = team
             team ^= 3
