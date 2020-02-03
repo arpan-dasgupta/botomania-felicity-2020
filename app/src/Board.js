@@ -10,38 +10,39 @@ export default class Board extends React.Component {
     }
     // testing purposes
     for (let i = 0; i < 100; i++) {
-      this.state.squares[i] = Math.floor(Math.random()*3)
+      this.state.squares[i] = Math.floor(Math.random() * 3)
     }
   }
 
-    renderSquare(i) {
+  renderSquare(i) {
     return (
-      <Square 
+      <Square
         value={this.state.squares[i]}
       />
     )
   }
 
   render() {
-    const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-    
     const board = [];
     for (let i = 0; i < 10; i++) {
       const temp = []
       for (let j = 0; j < 10; j++) {
-        temp.push(this.renderSquare(i*10+j));
+        temp.push(this.renderSquare(i * 10 + j));
       }
       board.push(
-        <div className="board-row">
+        <tr>
           {temp}
-        </div>
+        </tr>
       );
     }
 
     return (
-      // <div className="status">{status}</div>
       <div className="board">
-        {board}
+        <table>
+          <tbody>
+            {board}
+          </tbody>
+        </table>
       </div>
     );
   }
