@@ -66,7 +66,7 @@ def start():
     new_game = Game(player1, player2, board_size)
 
     board_size = int(request.form["board_size"])
-    turn = 0
+    turn = 1
     game_state = [0 for i in range(board_size**2)]
 
     db.session.add(new_game)
@@ -98,14 +98,16 @@ def make_move():
     """
     # question = Quiz.query.filter(Quiz.id == q_id).first()
 
-    r_pos = request.form["r_pos"]
-    c_pos = request.form["c_pos"]
+    r_pos = int(request.form["r_pos"])
+    c_pos = int(request.form["c_pos"])
     global turn
     global game_state
+    global board_size
+    print(request.remote_addr)
 
-    if (turn == 0 and request.remote_addr == ip1) or (turn == 1 and request.remote_addr == ip2):
+    if (turn == 1 and request.remote_addr == ip1) or (turn == 2 and request.remote_addr == ip2):
         game_state[board_size*r_pos+c_pos] = turn
-        turn = 3 - turn
+        turn ^= 3
         return jsonify(success=True)
 
     return jsonify(success=False)
