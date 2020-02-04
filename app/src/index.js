@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Game from './Game/Game';
+import Home from './Pages/home'
 import * as serviceWorker from './serviceWorker';
 import {
   BrowserRouter as Router,
@@ -41,6 +42,7 @@ class App extends React.Component {
             renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/">
+              <Home />
             </Route>
             <Route path="/instructions">
             </Route>
