@@ -22,6 +22,8 @@ turn = 0
 def move(player, r_n, c_n):
     global board_size
     global game_state
+    # print("yo")
+    # print(game_state[r_n*board_size + c_n])
     if game_state[r_n*board_size + c_n] != 0:
         return -1
 
@@ -115,6 +117,10 @@ def move(player, r_n, c_n):
 
     if len(to_flip) == 0:
         return -1
+    to_flip.append(r_n*board_size+c_n)
+    for e in to_flip:
+        game_state[e] = player
+    # print("yo")
     return 0
 
 # @mod_game.route("/delete", methods=["POST"])
@@ -165,6 +171,13 @@ def start():
     board_size = int(request.form["board_size"])
     turn = 1
     game_state = [0 for i in range(board_size**2)]
+    p = int((board_size**2) / 2)
+    print(p)
+    # game_state[p] = 999
+    game_state[p - int(board_size/2)] = 1
+    game_state[p - int(board_size/2) - 1] = 2
+    game_state[p + int(board_size/2)] = 2
+    game_state[p + int(board_size/2) - 1] = 1
 
     db.session.add(new_game)
     db.session.commit()
@@ -203,8 +216,9 @@ def make_move():
     print(request.remote_addr)
 
     if (turn == 1 and request.remote_addr == ip1) or (turn == 2 and request.remote_addr == ip2):
-        game_state[board_size*r_pos+c_pos] = turn
-        if move(turn, r_pos, c_pos):
+        # game_state[board_size*r_pos+c_pos] = turn
+        rv = move(turn, r_pos, c_pos)
+        if rv == 0:
             turn ^= 3
             return jsonify(success=True)
         else:
