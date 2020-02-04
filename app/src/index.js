@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Game from './Game/Game';
+import GamePage from './Pages/game';
 import Home from './Pages/home'
 import * as serviceWorker from './serviceWorker';
 import {
@@ -41,12 +41,15 @@ class App extends React.Component {
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
-            <Route path="/">
+            <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/instructions">
+            <Route exact path="/instructions">
             </Route>
-            <Route path="/test">
+            <Route exact path="/test">
+            </Route>
+            <Route exact path="/game/:port" component={GamePage}>
+              <GamePage />
             </Route>
           </Switch>
         </div>

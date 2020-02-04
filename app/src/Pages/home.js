@@ -1,8 +1,24 @@
 import React from 'react';
 
 export default class Home extends React.Component {
-  poll = () => {
+  constructor(props) {
+    super(props);
 
+    this.apiUrl = null;
+    this.timer = null;
+    this.pollInterval = 1000;
+  }
+  
+  componentDidMount() {
+    this.interval = setInterval(this.poll, this.pollInterval);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+  
+  poll = () => {
+    // TODO
   }
 
   render() {
