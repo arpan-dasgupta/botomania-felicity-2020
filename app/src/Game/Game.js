@@ -1,6 +1,6 @@
-import React from "react";
-import "./App.css";
-import Board from "./Board";
+import React from 'react';
+import './Game.css';
+import Board from './Board'
 
 export default class Game extends React.Component {
   constructor(props) {

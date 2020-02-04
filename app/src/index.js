@@ -1,10 +1,59 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Game from './Game';
+import Game from './Game/Game';
 import * as serviceWorker from './serviceWorker';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+} from "react-router-dom"
 
-ReactDOM.render(<Game />, document.getElementById('root'));
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <nav className="navbar navbar-expand-sm navbar-light bg-light">
+            <a className="navbar-brand" href="/">Botomania</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div className="collapse navbar-collapse" id="navbarToggler">
+              <ul className="navbar-nav ml-auto">
+                <li>
+                  <Link to="/" className="nav-link active">Home</Link>
+                </li>
+                <li>
+                  <Link to="/instructions" className="nav-link">Instructions</Link>
+                </li>
+                <li>
+                  <Link to="/test" className="nav-link">Test</Link>
+                </li>
+              </ul>
+            </div>
+          </nav>
+
+          {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/">
+            </Route>
+            <Route path="/instructions">
+            </Route>
+            <Route path="/test">
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
