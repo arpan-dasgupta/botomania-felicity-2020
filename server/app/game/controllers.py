@@ -18,8 +18,14 @@ ip1 = 0
 ip2 = 0
 turn = 0
 
-# the C of CRUD
 
+def move(player, r_n, c_n):
+    global board_size
+    global game_state
+    if game_state[r_n*board_size + c_n] != 0:
+        return -1
+
+    return 0
 
 # @mod_game.route("/delete", methods=["POST"])
 # def delete():
@@ -31,6 +37,7 @@ turn = 0
 #     """
 #     db.drop_all()
 #     return jsonify(success=True)
+
 
 @mod_game.route("/display", methods=["GET"])
 def delete():
@@ -107,7 +114,10 @@ def make_move():
 
     if (turn == 1 and request.remote_addr == ip1) or (turn == 2 and request.remote_addr == ip2):
         game_state[board_size*r_pos+c_pos] = turn
-        turn ^= 3
-        return jsonify(success=True)
+        if move(turn, r_pos, c_pos):
+            turn ^= 3
+            return jsonify(success=True)
+        else:
+            return jsonify(success=False)
 
     return jsonify(success=False)
