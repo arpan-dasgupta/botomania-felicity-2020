@@ -11,24 +11,29 @@ export default class Game extends React.Component {
       turn: 1,
     }
 
-    this.apiUrl = "localhost:5000";
-    this.board;
-    this.timer; // timer for polling the backend
+    this.apiUrl = "http://localhost:5000";
+    this.board = 0;
+    this.timer = 0; // timer for polling the backend
     this.pollInterval = 1000; // interval for polling
   }
 
-  async poll() {
+  poll = async () => {
     try {
-      let response = await fetch(`${apiUrl}/game/get_status`);
+      let response = await fetch("/game/get_status", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      let data = await response.json();
       if (response.ok) {
-        let data = await response.json();
         this.setState({
           boardState: data["state"],
           turn: data["turn"],
-        })
+        });
       }
       return data["success"];
-    } catch {
+    } catch(err) {
       console.warn("Error fetching the board");
     }
   }

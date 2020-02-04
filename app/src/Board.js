@@ -2,18 +2,10 @@ import React from 'react'
 import Square from './Square'
 
 export default class Board extends React.Component {
-  constructor(props) {
-    super(props);
-    // testing purposes
-    for (let i = 0; i < 100; i++) {
-      this.state.squares[i] = Math.floor(Math.random() * 3)
-    }
-  }
-
   renderSquare(i) {
     return (
       <Square
-        value={this.state.squares[i]}
+        value={this.props.squares[i]}
       />
     )
   }
