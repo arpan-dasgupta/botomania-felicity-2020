@@ -1,5 +1,5 @@
 __pycache__
 venv
-webapp/config.py
+server/config.py
 node_modules
-webapp/app.db
+server/app.db
