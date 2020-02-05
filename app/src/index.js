@@ -19,8 +19,8 @@ class App extends React.Component {
           <nav className="navbar navbar-expand-sm navbar-light bg-light">
             <a className="navbar-brand" href="/">Botomania</a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler">
-              <span class="navbar-toggler-icon"></span>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler">
+              <span className="navbar-toggler-icon"></span>
             </button>
 
             <div className="collapse navbar-collapse" id="navbarToggler">
@@ -48,9 +48,7 @@ class App extends React.Component {
             </Route>
             <Route exact path="/test">
             </Route>
-            <Route exact path="/game/:port" component={GamePage}>
-              <GamePage />
-            </Route>
+            <Route exact path="/game/:port" component={GamePage} />
           </Switch>
         </div>
       </Router>

@@ -7,19 +7,20 @@ export default class Game extends React.Component {
     super(props);
 
     this.state = {
-      boardState: Array(100).fill(null),
-      turn: 1
-    };
 
-    this.apiUrl = "http://0.0.0.0:5000";
-    this.board = 0;
-    this.timer = 0; // timer for polling the backend
+      boardState: Array(100).fill(0),
+      turn: 1,
+    }
+
+    this.apiUrl = `http://0.0.0.0:${props.port}`;
+    this.board = null;
+    this.timer = null; // timer for polling the backend
     this.pollInterval = 1000; // interval for polling
   }
 
   poll = async () => {
     try {
-      let response = await fetch("/game/get_status", {
+      let response = await fetch(`${this.apiUrl}/game/get_status`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json"
@@ -48,9 +49,25 @@ export default class Game extends React.Component {
 
   render() {
     return (
-      <section className="game">
-        <Board squares={this.state.boardState} turn={this.state.turn} />
-      </section>
+      <div className="container">
+        <div className="row justify-content-center">
+          <Board squares={this.state.boardState} turn={this.state.turn} />
+        </div>
+        <div className="row justify-content-center mt-3">
+          <h2>Next Player:
+          </h2>
+          {parseInt(this.state.turn) === 1 &&
+            <svg height="3em" width="3em">
+              <circle cx="1.5em" cy="1.5em" r="1em" fill="#111"></circle>
+            </svg>
+          }
+          {parseInt(this.state.turn) === 2 &&
+            <svg height="3em" width="3em">
+              <circle cx="1.5em" cy="1.5em" r="1em" fill="#111"></circle>
+            </svg>
+          }
+        </div>
+      </div>
     );
   }
 }

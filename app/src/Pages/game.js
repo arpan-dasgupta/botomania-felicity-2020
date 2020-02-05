@@ -5,7 +5,9 @@ export default class GamePage extends React.Component {
   render() {
     return (
       <section>
-        <Game />
+        <div className="container my-5">
+          <Game port={this.props.match.params.port}/>
+        </div>
       </section>
     );
   }
