@@ -8,8 +8,8 @@ def sample_move(state, turn):
 
 
 if __name__ == "__main__":
-    URL = "http://127.0.0.1:5000/game/get_status"
-    URL_POST = "http://127.0.0.1:5000/game/make_move"
+    URL = "http://0.0.0.0:5000/game/get_status"
+    URL_POST = "http://0.0.0.0:5000/game/make_move"
     player_id = 1
 
     # sending get request and saving the response as response object
@@ -19,7 +19,7 @@ if __name__ == "__main__":
         data = r.json()
 
         if data['success'] == True and data['turn'] == player_id:
-            print(data['state'])
+            print(data)
             ##########
             # call user function here
             move = sample_move(data['state'], data['turn'])

@@ -1,6 +1,6 @@
-import React from 'react';
-import './App.css';
-import Board from './Board'
+import React from "react";
+import "./App.css";
+import Board from "./Board";
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -8,10 +8,10 @@ export default class Game extends React.Component {
 
     this.state = {
       boardState: Array(100).fill(null),
-      turn: 1,
-    }
+      turn: 1
+    };
 
-    this.apiUrl = "http://localhost:5000";
+    this.apiUrl = "http://0.0.0.0:5000";
     this.board = 0;
     this.timer = 0; // timer for polling the backend
     this.pollInterval = 1000; // interval for polling
@@ -22,30 +22,30 @@ export default class Game extends React.Component {
       let response = await fetch("/game/get_status", {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
-        },
+          "Content-Type": "application/json"
+        }
       });
       let data = await response.json();
       if (response.ok) {
         this.setState({
           boardState: data["state"],
-          turn: data["turn"],
+          turn: data["turn"]
         });
       }
       return data["success"];
-    } catch(err) {
+    } catch (err) {
       console.warn("Error fetching the board");
     }
-  }
+  };
 
   componentDidMount() {
-    this.timer = setInterval(this.poll, this.pollInterval) // setup polling
+    this.timer = setInterval(this.poll, this.pollInterval); // setup polling
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
-  }  
-  
+  }
+
   render() {
     return (
       <section className="game">

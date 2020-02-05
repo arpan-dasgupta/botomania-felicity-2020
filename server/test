@@ -5,7 +5,7 @@
 [[ $(type -P curl) ]] || { echo "Please install curl"; exit 1; }
 
 # check if the server is up
-if [[ $( curl -s localhost:5000/test ) != "Success" ]]; then
+if [[ $( curl -s 0.0.0.0:5000/test ) != "Success" ]]; then
     echo "The server is not alive"
     exit 1
 fi

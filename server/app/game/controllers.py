@@ -24,6 +24,7 @@ def move(player, r_n, c_n):
     global board_size
     global game_state
 
+    print(player, r_n, c_n)
     flag = 0
     p1_c = 0
     p2_c = 0
@@ -47,7 +48,6 @@ def move(player, r_n, c_n):
         return (3-player)
 
     # print("yo")
-    # print(player,r_n,c_n)
     # print(game_state[r_n*board_size + c_n])
     if game_state[r_n*board_size + c_n] != 0:
         return -1
@@ -244,7 +244,7 @@ def make_move():
     global game_state
     global board_size
     global winner
-    print(request.remote_addr)
+    # print(request.remote_addr)
 
     if (turn == 1 and request.remote_addr == ip1) or (turn == 2 and request.remote_addr == ip2):
         # game_state[board_size*r_pos+c_pos] = turn
