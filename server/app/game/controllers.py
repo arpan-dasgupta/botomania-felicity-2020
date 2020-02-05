@@ -17,11 +17,35 @@ game_state = [0 for i in range(board_size**2)]
 ip1 = 0
 ip2 = 0
 turn = 0
+winner = 0
 
 
 def move(player, r_n, c_n):
     global board_size
     global game_state
+
+    flag = 0
+    p1_c = 0
+    p2_c = 0
+
+    for x in game_state:
+        if x == 1:
+            p1_c += 1
+        else:
+            p2_c += 1
+        if x == 0:
+            flag = 1
+
+    if flag == 0:
+        if p1_c > p2_c:
+            return 1
+        if p1_c < p2_c:
+            return 2
+        return 3
+
+    if r_n < 0 or c_n < 0 or r_n >= board_size or c_n >= board_size:
+        return (3-player)
+
     # print("yo")
     # print(player,r_n,c_n)
     # print(game_state[r_n*board_size + c_n])
@@ -199,7 +223,8 @@ def get_status():
         Returns a json object containing board state
     """
     # all_questions = Game.query.all()
-
+    if winner != 0:
+        return jsonify(success=True, state=game_state, turn=turn, winner=winner)
     return jsonify(success=True, state=game_state, turn=turn)
 
 # the D of CRUD
@@ -218,6 +243,7 @@ def make_move():
     global turn
     global game_state
     global board_size
+    global winner
     print(request.remote_addr)
 
     if (turn == 1 and request.remote_addr == ip1) or (turn == 2 and request.remote_addr == ip2):
@@ -226,7 +252,10 @@ def make_move():
         if rv == 0:
             turn ^= 3
             return jsonify(success=True)
-        else:
+        elif rv == -1:
             return jsonify(success=False)
+        else:
+            winner = rv
+            return jsonify(success=True)
 
     return jsonify(success=False)
