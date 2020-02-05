@@ -15,3 +15,13 @@
   border: .9em solid #222;
   font-size: 14px;
 }
+
+.wrapper {
+  overflow-x: scroll;
+}
+
+table {
+  display: block;
+  table-layout: fixed;
+  width: 30em;
+}
