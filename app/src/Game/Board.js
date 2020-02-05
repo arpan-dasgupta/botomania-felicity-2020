@@ -27,7 +27,7 @@ export default class Board extends React.Component {
     return (
       <div className="wrapper">
         <div className="board">
-          <table>
+          <table id="board-table">
             <tbody>
               {board}
             </tbody>

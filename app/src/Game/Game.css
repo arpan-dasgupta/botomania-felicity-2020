@@ -20,7 +20,7 @@
   overflow-x: scroll;
 }
 
-table {
+#board-table {
   display: block;
   table-layout: fixed;
   width: 30em;

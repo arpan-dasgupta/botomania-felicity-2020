@@ -8,7 +8,7 @@ export default class Home extends React.Component {
     this.timer = null;
     this.pollInterval = 1000;
   }
-  
+
   componentDidMount() {
     this.interval = setInterval(this.poll, this.pollInterval);
   }
@@ -16,7 +16,7 @@ export default class Home extends React.Component {
   componentWillUnmount() {
     clearInterval(this.timer);
   }
-  
+
   poll = () => {
     // TODO
   }
@@ -30,10 +30,12 @@ export default class Home extends React.Component {
           </div>
           <table className="table table-bordered table-hover table-responsive-sm">
             <thead>
-              <th style={{ width: "7.5%" }}>#</th>
-              <th>Player 1</th>
-              <th>Player 2</th>
-              <th>Winner</th>
+              <tr>
+                <th style={{ width: "7.5%" }}>#</th>
+                <th>Player 1</th>
+                <th>Player 2</th>
+                <th>Winner</th>
+              </tr>
             </thead>
             <tbody>
               <Tr href="https://www.google.co.in">
