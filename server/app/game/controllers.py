@@ -23,6 +23,7 @@ def move(player, r_n, c_n):
     global board_size
     global game_state
     # print("yo")
+    # print(player,r_n,c_n)
     # print(game_state[r_n*board_size + c_n])
     if game_state[r_n*board_size + c_n] != 0:
         return -1
@@ -35,28 +36,28 @@ def move(player, r_n, c_n):
         if game_state[i*board_size+c_n] == player:
             for j in range(r_n+1, i):
                 to_flip.append(j*board_size+c_n)
-                break
+            break
     for i in range(c_n+1, board_size):
         if game_state[r_n*board_size+i] == 0:
             break
         if game_state[r_n*board_size+i] == player:
             for j in range(c_n+1, i):
                 to_flip.append(r_n*board_size+j)
-                break
+            break
     for i in range(r_n-1, -1, -1):
         if game_state[i*board_size+c_n] == 0:
             break
         if game_state[i*board_size+c_n] == player:
             for j in range(r_n-1, i, -1):
                 to_flip.append(j*board_size+c_n)
-                break
+            break
     for i in range(c_n-1, -1, -1):
         if game_state[r_n*board_size+i] == 0:
             break
         if game_state[r_n*board_size+i] == player:
             for j in range(c_n-1, i, -1):
                 to_flip.append(r_n*board_size+j)
-                break
+            break
 
     i = r_n+1
     j = c_n+1
@@ -70,8 +71,9 @@ def move(player, r_n, c_n):
                 to_flip.append(rr*board_size+cc)
                 rr += 1
                 cc += 1
-            i += 1
-            j += 1
+            break
+        i += 1
+        j += 1
     i = r_n - 1
     j = c_n - 1
     while i >= 0 and j >= 0:
@@ -84,8 +86,9 @@ def move(player, r_n, c_n):
                 to_flip.append(rr*board_size+cc)
                 rr -= 1
                 cc -= 1
-            i -= 1
-            j -= 1
+            break
+        i -= 1
+        j -= 1
     i = r_n + 1
     j = c_n - 1
     while i < board_size and j >= 0:
@@ -98,8 +101,9 @@ def move(player, r_n, c_n):
                 to_flip.append(rr*board_size+cc)
                 rr += 1
                 cc -= 1
-            i += 1
-            j -= 1
+            break
+        i += 1
+        j -= 1
     i = r_n - 1
     j = c_n + 1
     while i >= 0 and j < board_size:
@@ -112,8 +116,9 @@ def move(player, r_n, c_n):
                 to_flip.append(rr*board_size+cc)
                 rr -= 1
                 cc += 1
-            i -= 1
-            j += 1
+            break
+        i -= 1
+        j += 1
 
     if len(to_flip) == 0:
         return -1

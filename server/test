@@ -11,9 +11,11 @@ if [[ $( curl -s localhost:5000/test ) != "Success" ]]; then
 fi
 
 if (( $# < 1 )); then
-    echo "Usage: $0 <start|move|stat>"
+    echo "Usage: $0 <start|stat|move r c>"
     exit 1;
 fi
+
+MOVE_REGEX='[0-9a-zA-Z]'
 
 while (( $# > 0 )); do
     case "$1" in
@@ -21,8 +23,23 @@ while (( $# > 0 )); do
             http -f POST :5000/game/start p1=me p2=you ip1=127.0.0.1 ip2=127.0.0.1 board_size=10
             shift ;;
         move )
-            http -f POST :5000/game/make_move r_pos=0 c_pos=0
-            shift ;;
+	    shift
+
+	    if (( $# < 2 )); then
+		echo "Please supply both row and col for move"
+		exit 1
+	    fi
+
+	    R_POS="$1"
+	    C_POS="$2"
+
+	    if ! [[ "$( grep -P "$MOVE_REGEX" <<< "$R_POS" )" || "$( grep -P "$MOVE_REGEX" <<< "$C_POS" )" ]]; then
+		echo "Please supply row/col pos in [0-9a-zA-Z]"
+		exit 1
+	    fi
+
+            http -f POST :5000/game/make_move r_pos="$R_POS" c_pos="$C_POS"
+            shift 2 ;;
         stat )
             http -f GET :5000/game/get_status
             shift ;;
