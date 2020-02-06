@@ -1,0 +1,12 @@
+#!/bin/bash
+
+tmux new -d -s test "python3 __init__.py 5000" \; \
+     new-window "python3 __init__.py 5001" \; \
+     new-window "python3 __init__.py 5002" \; \
+     new-window "python3 __init__.py 5003" \; \
+     new-window "python3 __init__.py 5004" \; \
+     new-window "python3 __init__.py 5005" \; \
+     new-window "python3 __init__.py 5006" \; \
+     new-window "python3 __init__.py 5007" \; \
+     new-window "python3 __init__.py 5008" \; \
+     new-window "python3 __init__.py 5009" \; \
