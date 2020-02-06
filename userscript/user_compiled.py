@@ -1,10 +1,11 @@
 import subprocess
 import requests
 import sys
+import time
 
 if __name__ == "__main__":
-    URL = "https://threads.iiit.ac.in:5000/game/get_status"
-    URL_POST = "https://threads.iiit.ac.in:5000/game/make_move"
+    URL = "https://threads.iiit.ac.in:5005/game/get_status"
+    URL_POST = "https://threads.iiit.ac.in:5005/game/make_move"
     player_id = 1
 
     # sending get request and saving the response as response object
@@ -20,7 +21,7 @@ if __name__ == "__main__":
                 for j in range(0, 10):
                     inp.write(f"{data['state'][i*10 + j]} ")
                 inp.write('\n')
-            inp.write(player_id)
+            inp.write(str(player_id))
             inp.close()
 
             print(data)
@@ -33,10 +34,11 @@ if __name__ == "__main__":
                 c_pos = out.readline()[0]
                 out.close()
                 data = {
-                    'r_pos': int(r_pos)
+                    'r_pos': int(r_pos),
                     'c_pos': int(c_pos)
                 }
-            except subprocess.TimoutExpired:
+                print(r_pos, c_pos)
+            except subprocess.TimeoutExpired:
                 print("Program ran too long")
                 data = {'r_pos': -1,
                         'c_pos': -1}
