@@ -84,7 +84,7 @@ void papair(vector<T, A> const &a, ll begin = 0, ll end = -1) {
 
 ll check(vv grid, ll row, ll col, ll player) {
     int tot = 0;
-    if (grid[row][col] == player)
+    if (grid[row][col] != 0)
         return 0;
     for (ll i = row + 1; i < 10; i++) {
         if (grid[i][col] == 0)
@@ -193,6 +193,8 @@ int main(void) {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
+    freopen("input.in", "r", stdin);
+    freopen("output.out", "w", stdout);
     // ll t;cin >> t;while(t--)
     solve();
     return 0;

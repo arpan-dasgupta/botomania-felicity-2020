@@ -9,6 +9,7 @@ from flask import Blueprint, request, jsonify
 
 from app import db
 from .models import Game
+import time
 
 mod_game = Blueprint("game", __name__, url_prefix="/game")
 
@@ -263,6 +264,7 @@ def make_move():
         rv = move(turn, r_pos, c_pos)
         if rv == 0:
             turn ^= 3
+            time.sleep(1)
             return jsonify(success=True)
         elif rv == -1:
             winner = (3-turn)

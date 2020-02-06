@@ -28,7 +28,7 @@ if __name__ == "__main__":
 
             # call user binary here
             try:
-                subprocess.run('./a.out', timeout=1)
+                subprocess.run('./a.out', timeout=3)
                 out = open('output.out', 'r')
                 r_pos = out.readline()[0]
                 c_pos = out.readline()[0]
