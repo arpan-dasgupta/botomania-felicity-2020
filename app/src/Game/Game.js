@@ -7,15 +7,15 @@ export default class Game extends React.Component {
     super(props);
 
     this.state = {
-
       boardState: Array(100).fill(0),
       turn: 0,
+      winner: 0,
     }
 
     this.apiUrl = `https://threads.iiit.ac.in:${props.port}`;
     this.board = null;
     this.timer = null; // timer for polling the backend
-    this.pollInterval = 1000; // interval for polling
+    this.pollInterval = 3000; // interval for polling
   }
 
   poll = async () => {
@@ -30,7 +30,8 @@ export default class Game extends React.Component {
       if (response.ok) {
         this.setState({
           boardState: data["state"],
-          turn: data["turn"]
+          turn: data["turn"],
+          winner: data["winner"]
         });
       }
       return data["success"];
@@ -54,6 +55,22 @@ export default class Game extends React.Component {
           <Board squares={this.state.boardState} turn={this.state.turn} />
         </div>
         <div className="row justify-content-center mt-3">
+          {parseInt(this.state.winner) !== 0 &&
+            <h2>
+              Winner:
+            </h2>
+          }
+          {parseInt(this.state.winner) === 1 &&
+            <svg height="3em" width="3em">
+              <circle cx="1.5em" cy="1.5em" r="1em" fill="#111"></circle>
+            </svg>
+          }
+          {parseInt(this.state.winner) === 2 &&
+            <svg height="3em" width="3em">
+              <circle cx="1.5em" cy="1.5em" r="1em" stroke="#111" strokeWidth="2" fill="#eee"></circle>
+            </svg>
+          }
+          <br />
           <h2>Next Player:
           </h2>
           {parseInt(this.state.turn) === 1 &&
