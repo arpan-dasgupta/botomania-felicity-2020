@@ -2,11 +2,6 @@ from solution import make_move
 import requests
 import time
 
-
-def sample_move(state, turn):
-    return (3, 4)
-
-
 if __name__ == "__main__":
     URL = "https://threads.iiit.ac.in:5005/game/get_status"
     URL_POST = "https://threads.iiit.ac.in:5005/game/make_move"
@@ -17,15 +12,13 @@ if __name__ == "__main__":
         r = requests.get(url=URL)
         # extracting data in json format
         data = r.json()
-
         if data['success'] == True and int(data['turn']) == player_id:
-            print(data)
 
             inp_data = []
             for i in range(0, 10):
                 temp = []
                 for j in range(0, 10):
-                    temp.append(int({data['state'][i*10 + j]}))
+                    temp.append(int(data['state'][i*10 + j]))
                 inp_data.append(temp)
                 temp.clear()
 
@@ -38,6 +31,8 @@ if __name__ == "__main__":
 
             # sending post request and saving response as response object
             r = requests.post(url=URL_POST, data=data)
+
+            print(move)
 
             # extracting response text
             pastebin_url = r.text
