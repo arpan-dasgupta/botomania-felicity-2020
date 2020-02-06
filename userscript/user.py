@@ -1,4 +1,4 @@
-from ./solution import make_move
+from solution import make_move
 import requests
 import time
 
@@ -8,9 +8,9 @@ def sample_move(state, turn):
 
 
 if __name__ == "__main__":
-    URL = "http://0.0.0.0:5000/game/get_status"
-    URL_POST = "http://0.0.0.0:5000/game/make_move"
-    player_id = 1
+    URL = "https://threads.iiit.ac.in:5005/game/get_status"
+    URL_POST = "https://threads.iiit.ac.in:5005/game/make_move"
+    player_id = 2
 
     # sending get request and saving the response as response object
     while(True):
@@ -18,7 +18,7 @@ if __name__ == "__main__":
         # extracting data in json format
         data = r.json()
 
-        if data['success'] == True and data['turn'] == player_id:
+        if data['success'] == True and int(data['turn']) == player_id:
             print(data)
 
             inp_data = []
