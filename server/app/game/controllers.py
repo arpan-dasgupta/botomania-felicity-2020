@@ -18,6 +18,7 @@ ip1 = 0
 ip2 = 0
 turn = 0
 winner = 0
+gid = 0
 
 
 def move(player, r_n, c_n):
@@ -188,6 +189,7 @@ def start():
     global ip1
     global ip2
     global turn
+    global gid
 
     player1 = request.form["p1"]
     player2 = request.form["p2"]
@@ -196,9 +198,11 @@ def start():
     ip2 = request.form["ip2"]
 
     new_game = Game(player1, player2, board_size)
+    gid = new_game.id
 
     board_size = int(request.form["board_size"])
     turn = 1
+    winner = 0
     game_state = [0 for i in range(board_size**2)]
     p = int((board_size**2) / 2)
     print(p)
@@ -246,6 +250,9 @@ def make_move():
     global winner
     # print(request.remote_addr)
 
+    if winner != 0:
+        return jsonify(success=False)
+
     if (turn == 1 and request.remote_addr == ip1) or (turn == 2 and request.remote_addr == ip2):
         # game_state[board_size*r_pos+c_pos] = turn
         rv = move(turn, r_pos, c_pos)
@@ -256,6 +263,9 @@ def make_move():
             return jsonify(success=False)
         else:
             winner = rv
+            cg = Game.query.filter_by(id=gid).first()
+            cg.winner = rv
+            db.session.commit()
             return jsonify(success=True)
 
     return jsonify(success=False)
