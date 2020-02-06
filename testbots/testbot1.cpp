@@ -82,11 +82,111 @@ void papair(vector<T, A> const &a, ll begin = 0, ll end = -1) {
     }
 }
 
+ll check(vv grid, ll row, ll col, ll player) {
+    int tot = 0;
+    if (grid[row][col] == player)
+        return 0;
+    for (ll i = row + 1; i < 10; i++) {
+        if (grid[i][col] == 0)
+            break;
+        if (grid[i][col] == player) {
+            tot += (i - row - 1);
+            break;
+        }
+    }
+    for (ll i = col + 1; i < 10; i++) {
+        if (grid[row][i] == 0)
+            break;
+        if (grid[row][i] == player) {
+            tot += (i - col - 1);
+            break;
+        }
+    }
+    for (ll i = row - 1; i >= 0; i--) {
+        if (grid[i][col] == 0)
+            break;
+        if (grid[i][col] == player) {
+            tot += (row - 1 - i);
+            break;
+        }
+    }
+    for (ll i = col - 1; i >= 0; i--) {
+        if (grid[row][i] == 0)
+            break;
+        if (grid[row][i] == player) {
+            tot += (col - 1 - i);
+            break;
+        }
+    }
+    int i, j;
+    i = row + 1, j = col + 1;
+    while (i < 10 && j < 10) {
+        if (grid[i][j] == 0)
+            break;
+        if (grid[i][j] == player) {
+            tot += (i - row - 1);
+            break;
+        }
+        i++, j++;
+    }
+    i = row + 1, j = col - 1;
+    while (i < 10 && j >= 0) {
+        if (grid[i][j] == 0)
+            break;
+        if (grid[i][j] == player) {
+            tot += (i - row - 1);
+            break;
+        }
+        i++, j--;
+    }
+    i = row - 1, j = col + 1;
+    while (i >= 0 && j < 10) {
+        if (grid[i][j] == 0)
+            break;
+        if (grid[i][j] == player) {
+            tot += (row - i - 1);
+            break;
+        }
+        i--, j++;
+    }
+    i = row - 1, j = col - 1;
+    while (i >= 0 && j >= 0) {
+        if (grid[i][j] == 0)
+            break;
+        if (grid[i][j] == player) {
+            tot += (row - i - 1);
+            break;
+        }
+        i--, j--;
+    }
+    return tot;
+}
+
 void solve() {
-    ll n;
-    cin >> n;
-    // vector<ll> arr = ga(n);
-    // code
+    vv grid(10);
+    ll x;
+    for (ll i = 0; i < 10; i++) {
+        for (ll j = 0; j < 10; j++) {
+            cin >> x;
+            grid[i].push_back(x);
+        }
+    }
+    ll player;
+    cin >> player;
+    ll best = 0;
+    pll move = {-1, -1};
+    for (ll i = 0; i < 10; i++) {
+        for (ll j = 0; j < 10; j++) {
+            ll rv = check(grid, i, j, player);
+            if (rv != -1) {
+                if (rv > best) {
+                    best = rv;
+                    move = {i, j};
+                }
+            }
+        }
+    }
+    cout << move.first << '\n' << move.second << '\n';
 }
 
 int main(void) {
