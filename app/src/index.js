@@ -9,15 +9,16 @@ import {
   Switch,
   Route,
   Link,
-} from "react-router-dom"
+} from "react-router-dom";
 
 class App extends React.Component {
   render() {
+    const basename = "/botomania";
     return (
-      <Router>
+      <Router basename={basename}>
         <div>
           <nav className="navbar navbar-expand-sm navbar-light bg-light">
-            <a className="navbar-brand" href="/">Botomania</a>
+            <a className="navbar-brand" href={basename + "/"}>Botomania</a>
 
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler">
               <span className="navbar-toggler-icon"></span>

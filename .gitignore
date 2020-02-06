@@ -3,3 +3,4 @@ venv
 server/config.py
 node_modules
 server/app.db
+app/build
