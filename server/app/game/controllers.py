@@ -12,6 +12,8 @@ from .models import Game
 
 mod_game = Blueprint("game", __name__, url_prefix="/game")
 
+player1 = ""
+player2 = ""
 board_size = 10
 game_state = [0 for i in range(board_size**2)]
 ip1 = 0
@@ -184,6 +186,9 @@ def start():
 
         Start game and init database
     """
+    global winner
+    global player1
+    global player2
     global game_state
     global board_size
     global ip1
@@ -228,8 +233,8 @@ def get_status():
     """
     # all_questions = Game.query.all()
     if winner != 0:
-        return jsonify(success=True, state=game_state, turn=turn, winner=winner)
-    return jsonify(success=True, state=game_state, turn=turn)
+        return jsonify(success=True, state=game_state, turn=turn, winner=winner, p1=player1, p2=player2)
+    return jsonify(success=True, state=game_state, turn=turn, p1=player1, p2=player2)
 
 # the D of CRUD
 @mod_game.route("/make_move", methods=["POST"])

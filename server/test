@@ -5,7 +5,7 @@
 [[ $(type -P curl) ]] || { echo "Please install curl"; exit 1; }
 
 # check if the server is up
-if [[ $( curl -s threads.iiit.ac.in:5000/test ) != "Success" ]]; then
+if [[ $( curl -s https://threads.iiit.ac.in:5000/test ) != "Success" ]]; then
     echo "The server is not alive"
     exit 1
 fi
@@ -20,7 +20,7 @@ MOVE_REGEX='[0-9a-zA-Z]'
 while (( $# > 0 )); do
     case "$1" in
         start )
-            http -f POST threads.iiit.ac.in:5000/game/start p1=me p2=you ip1=10.1.133.90 ip2=10.1.133.90 board_size=10
+            http -f POST https://threads.iiit.ac.in:5000/game/start p1=me p2=you ip1=10.1.133.90 ip2=10.1.133.90 board_size=10
             shift ;;
         move )
 	    shift
@@ -38,10 +38,10 @@ while (( $# > 0 )); do
 		exit 1
 	    fi
 
-            http -f POST threads.iiit.ac.in:5000/game/make_move r_pos="$R_POS" c_pos="$C_POS"
+            http -f POST https://threads.iiit.ac.in:5000/game/make_move r_pos="$R_POS" c_pos="$C_POS"
             shift 2 ;;
         stat )
-            http -f GET threads.iiit.ac.in:5000/game/get_status
+            http -f GET https://threads.iiit.ac.in:5000/game/get_status
             shift ;;
     esac
 done
