@@ -10,8 +10,8 @@ if [[ $( curl -s https://threads.iiit.ac.in:5000/test ) != "Success" ]]; then
     exit 1
 fi
 
-if (( $# < 1 )); then
-    echo "Usage: $0 <start|stat|move r c>"
+if (( $# < 2 )); then
+    echo "Usage: $0 <start|stat|move r c> PORT"
     exit 1;
 fi
 
@@ -20,28 +20,31 @@ MOVE_REGEX='[0-9a-zA-Z]'
 while (( $# > 0 )); do
     case "$1" in
         start )
-            http -f POST https://threads.iiit.ac.in:5000/game/start p1=me p2=you ip1=10.1.133.90 ip2=10.1.133.90 board_size=10
-            shift ;;
-        move )
-	    shift
-
-	    if (( $# < 2 )); then
-		echo "Please supply both row and col for move"
-		exit 1
-	    fi
-
-	    R_POS="$1"
-	    C_POS="$2"
-
-	    if ! [[ "$( grep -P "$MOVE_REGEX" <<< "$R_POS" )" || "$( grep -P "$MOVE_REGEX" <<< "$C_POS" )" ]]; then
-		echo "Please supply row/col pos in [0-9a-zA-Z]"
-		exit 1
-	    fi
-
-            http -f POST https://threads.iiit.ac.in:5000/game/make_move r_pos="$R_POS" c_pos="$C_POS"
+            PORT="$2"
+            http -f POST https://threads.iiit.ac.in:"$PORT"/game/start p1=me p2=you ip1=10.1.133.90 ip2=10.1.133.90 board_size=10
             shift 2 ;;
+        move )
+            shift
+
+            if (( $# < 3 )); then
+                echo "Please supply both row and col for move"
+                exit 1
+            fi
+
+            R_POS="$1"
+            C_POS="$2"
+            PORT="$3"
+
+            if ! [[ "$( grep -P "$MOVE_REGEX" <<< "$R_POS" )" || "$( grep -P "$MOVE_REGEX" <<< "$C_POS" )" ]]; then
+                echo "Please supply row/col pos in [0-9a-zA-Z]"
+                exit 1
+            fi
+
+            http -f POST https://threads.iiit.ac.in:"$PORT"/game/make_move r_pos="$R_POS" c_pos="$C_POS"
+            shift 3 ;;
         stat )
-            http -f GET https://threads.iiit.ac.in:5000/game/get_status
-            shift ;;
+            PORT="$2"
+            http -f GET https://threads.iiit.ac.in:"$PORT"/game/get_status
+            shift 2 ;;
     esac
 done
