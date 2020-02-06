@@ -232,9 +232,9 @@ def get_status():
         Returns a json object containing board state
     """
     # all_questions = Game.query.all()
-    if winner != 0:
-        return jsonify(success=True, state=game_state, turn=turn, winner=winner, p1=player1, p2=player2)
-    return jsonify(success=True, state=game_state, turn=turn, p1=player1, p2=player2)
+    # if winner != 0:
+    return jsonify(success=True, state=game_state, turn=turn, winner=winner, p1=player1, p2=player2)
+    # return jsonify(success=True, state=game_state, turn=turn, p1=player1, p2=player2)
 
 # the D of CRUD
 @mod_game.route("/make_move", methods=["POST"])
@@ -265,12 +265,16 @@ def make_move():
             turn ^= 3
             return jsonify(success=True)
         elif rv == -1:
+            winner = (3-turn)
+            cg = Game.query.filter_by(id=gid).first()
+            cg.winner = str(rv)
+            db.session.commit()
             return jsonify(success=False)
         else:
             winner = rv
             cg = Game.query.filter_by(id=gid).first()
-            cg.winner = rv
+            cg.winner = str(rv)
             db.session.commit()
-            return jsonify(success=True)
+            return jsonify(success=False)
 
     return jsonify(success=False)
