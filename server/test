@@ -21,7 +21,7 @@ while (( $# > 0 )); do
     case "$1" in
         start )
             PORT="$2"
-            http -f POST https://threads.iiit.ac.in:"$PORT"/game/start p1=me p2=you ip1=10.1.133.90 ip2=10.1.133.90 board_size=10
+            http -f POST https://threads.iiit.ac.in:"$PORT"/game/start p2=arpan p1=ishaan ip1=10.1.135.161 ip2=10.1.134.188 board_size=10
             shift 2 ;;
         move )
             shift
