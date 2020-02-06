@@ -20,6 +20,7 @@ if __name__ == "__main__":
                 for j in range(0, 10):
                     inp.write(f"{data['state'][i*10 + j]} ")
                 inp.write('\n')
+            inp.write(player_id)
             inp.close()
 
             print(data)
