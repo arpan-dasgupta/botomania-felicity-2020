@@ -9,10 +9,10 @@ export default class Game extends React.Component {
     this.state = {
 
       boardState: Array(100).fill(0),
-      turn: 1,
+      turn: 0,
     }
 
-    this.apiUrl = `http://0.0.0.0:${props.port}`;
+    this.apiUrl = `https://threads.iiit.ac.in:${props.port}`;
     this.board = null;
     this.timer = null; // timer for polling the backend
     this.pollInterval = 1000; // interval for polling
@@ -63,7 +63,7 @@ export default class Game extends React.Component {
           }
           {parseInt(this.state.turn) === 2 &&
             <svg height="3em" width="3em">
-              <circle cx="1.5em" cy="1.5em" r="1em" fill="#111"></circle>
+              <circle cx="1.5em" cy="1.5em" r="1em" stroke="#111" strokeWidth="2" fill="#eee"></circle>
             </svg>
           }
         </div>

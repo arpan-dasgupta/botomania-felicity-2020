@@ -30,10 +30,7 @@ class App extends React.Component {
                   <Link to="/" className="nav-link active">Home</Link>
                 </li>
                 <li>
-                  <Link to="/instructions" className="nav-link">Instructions</Link>
-                </li>
-                <li>
-                  <Link to="/test" className="nav-link">Test</Link>
+                  <Link to="/instructions" className="nav-link active">Instructions</Link>
                 </li>
               </ul>
             </div>
