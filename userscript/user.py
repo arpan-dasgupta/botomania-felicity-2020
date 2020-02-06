@@ -1,4 +1,4 @@
-
+from ./solution import make_move
 import requests
 import time
 
@@ -20,9 +20,18 @@ if __name__ == "__main__":
 
         if data['success'] == True and data['turn'] == player_id:
             print(data)
+
+            inp_data = []
+            for i in range(0, 10):
+                temp = []
+                for j in range(0, 10):
+                    temp.append(int({data['state'][i*10 + j]}))
+                inp_data.append(temp)
+                temp.clear()
+
             ##########
             # call user function here
-            move = sample_move(data['state'], data['turn'])
+            move = make_move(inp_data)
             ##########
             data = {'r_pos': move[0],
                     'c_pos': move[1]}
