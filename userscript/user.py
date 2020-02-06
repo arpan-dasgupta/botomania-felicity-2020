@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
             ##########
             # call user function here
-            move = make_move(inp_data)
+            move = make_move(inp_data, player_id)
             ##########
             data = {'r_pos': move[0],
                     'c_pos': move[1]}
