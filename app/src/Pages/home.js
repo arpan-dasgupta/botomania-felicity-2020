@@ -104,8 +104,16 @@ export default class Home extends React.Component {
             <thead>
               <tr>
                 <th style={{ width: "7.5%" }}>#</th>
-                <th>Team 1</th>
-                <th>Team 2</th>
+                <th>Team 1
+                  <svg height="3em" width="3em">
+                    <circle cx="1.5em" cy="1.5em" r="1em" stroke="#111" strokeWidth="2" fill="#111"></circle>
+                  </svg>
+                </th>
+                <th>Team 2
+                  <svg height="3em" width="3em">
+                    <circle cx="1.5em" cy="1.5em" r="1em" stroke="#111" strokeWidth="2" fill="#eee"></circle>
+                  </svg>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -158,7 +166,7 @@ export default class Home extends React.Component {
                 <th scope="row">10</th>
                 <td>{this.state.team1[9]}</td>
                 <td>{this.state.team2[9]}</td>
-              </Tr> 
+              </Tr>
             </tbody>
           </table>
         </div>

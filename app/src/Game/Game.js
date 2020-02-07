@@ -70,7 +70,8 @@ export default class Game extends React.Component {
               <circle cx="1.5em" cy="1.5em" r="1em" stroke="#111" strokeWidth="2" fill="#eee"></circle>
             </svg>
           }
-          <br />
+        </div>
+        <div className="row justify-content-center mt-3">
           <h2>Next Player:
           </h2>
           {parseInt(this.state.turn) === 1 &&
