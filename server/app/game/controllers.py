@@ -170,14 +170,29 @@ def move(player, r_n, c_n):
 
 
 @mod_game.route("/display", methods=["GET"])
-def delete():
+def display():
     """
         Path: <root>/game/display
         Methods: POST
 
         Display all records
     """
-    return jsonify(success=True)
+    with open('match_log.csv', 'r') as file:
+        reader = csv.reader(file)
+        # for row in reader:
+        #     print(row)
+    return jsonify(success=True, log=reader)
+
+
+@mod_game.route("/get_ip", methods=["GET"])
+def get_ip():
+    """
+        Path: <root>/game/display
+        Methods: POST
+
+        Get ip address
+    """
+    return jsonify(success=True, ip=request.remote_addr)
 
 
 @mod_game.route("/start", methods=["POST"])
