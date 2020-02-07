@@ -5,32 +5,34 @@ def make_move(game_state, player):
     f_c_n = -1
     for r_n in range(0, 10):
         for c_n in range(0, 10):
+            if game_state[r_n][c_n] != 0:
+                continue
             to_flip.clear()
             for i in range(r_n+1, board_size):
-                if game_state[i*board_size+c_n] == 0:
+                if game_state[i][c_n] == 0:
                     break
-                if game_state[i*board_size+c_n] == player:
+                if game_state[i][c_n] == player:
                     for j in range(r_n+1, i):
                         to_flip.append(j*board_size+c_n)
                     break
             for i in range(c_n+1, board_size):
-                if game_state[r_n*board_size+i] == 0:
+                if game_state[r_n][i] == 0:
                     break
-                if game_state[r_n*board_size+i] == player:
+                if game_state[r_n][i] == player:
                     for j in range(c_n+1, i):
                         to_flip.append(r_n*board_size+j)
                     break
             for i in range(r_n-1, -1, -1):
-                if game_state[i*board_size+c_n] == 0:
+                if game_state[i][c_n] == 0:
                     break
-                if game_state[i*board_size+c_n] == player:
+                if game_state[i][c_n] == player:
                     for j in range(r_n-1, i, -1):
                         to_flip.append(j*board_size+c_n)
                     break
             for i in range(c_n-1, -1, -1):
-                if game_state[r_n*board_size+i] == 0:
+                if game_state[r_n][i] == 0:
                     break
-                if game_state[r_n*board_size+i] == player:
+                if game_state[r_n][i] == player:
                     for j in range(c_n-1, i, -1):
                         to_flip.append(r_n*board_size+j)
                     break
@@ -38,9 +40,9 @@ def make_move(game_state, player):
             i = r_n+1
             j = c_n+1
             while i < board_size and j < board_size:
-                if game_state[i*board_size+j] == 0:
+                if game_state[i][j] == 0:
                     break
-                if game_state[i*board_size+j] == player:
+                if game_state[i][j] == player:
                     rr = r_n+1
                     cc = c_n+1
                     while rr < i and cc < j:
@@ -53,9 +55,9 @@ def make_move(game_state, player):
             i = r_n - 1
             j = c_n - 1
             while i >= 0 and j >= 0:
-                if game_state[i*board_size+j] == 0:
+                if game_state[i][j] == 0:
                     break
-                if game_state[i*board_size+j] == player:
+                if game_state[i][j] == player:
                     rr = r_n-1
                     cc = c_n-1
                     while rr > i and cc > j:
@@ -68,9 +70,9 @@ def make_move(game_state, player):
             i = r_n + 1
             j = c_n - 1
             while i < board_size and j >= 0:
-                if game_state[i*board_size+j] == 0:
+                if game_state[i][j] == 0:
                     break
-                if game_state[i*board_size+j] == player:
+                if game_state[i][j] == player:
                     rr = r_n+1
                     cc = c_n-1
                     while rr < i and cc > j:
@@ -83,9 +85,9 @@ def make_move(game_state, player):
             i = r_n - 1
             j = c_n + 1
             while i >= 0 and j < board_size:
-                if game_state[i*board_size+j] == 0:
+                if game_state[i][j] == 0:
                     break
-                if game_state[i*board_size+j] == player:
+                if game_state[i][j] == player:
                     rr = r_n-1
                     cc = c_n+1
                     while rr > i and cc < j:
