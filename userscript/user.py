@@ -19,9 +19,9 @@ if __name__ == "__main__":
                 temp = []
                 for j in range(0, 10):
                     temp.append(int(data['state'][i*10 + j]))
-                inp_data.append(temp)
+                inp_data.append(temp.copy())
                 temp.clear()
-
+            print(inp_data)
             ##########
             # call user function here
             move = make_move(inp_data, player_id)
