@@ -10,6 +10,7 @@ from flask import Blueprint, request, jsonify
 from app import db
 from .models import Game
 import time
+import csv
 
 mod_game = Blueprint("game", __name__, url_prefix="/game")
 
@@ -268,15 +269,21 @@ def make_move():
             return jsonify(success=True)
         elif rv == -1:
             winner = (3-turn)
-            cg = Game.query.filter_by(id=gid).first()
-            cg.winner = str(rv)
-            db.session.commit()
+            # cg = Game.query.filter_by(id=gid).first()
+            # cg.winner = str(rv)
+            # db.session.commit()
+            with open('match_log.csv', 'a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow([player1, player2, winner])
             return jsonify(success=False)
         else:
             winner = rv
-            cg = Game.query.filter_by(id=gid).first()
-            cg.winner = str(rv)
-            db.session.commit()
+            with open('match_log.csv', 'a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow([player1, player2, winner])
+            # cg = Game.query.filter_by(id=gid).first()
+            # cg.winner = str(rv)
+            # db.session.commit()
             return jsonify(success=False)
 
     return jsonify(success=False)
