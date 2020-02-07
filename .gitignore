@@ -4,3 +4,6 @@ server/config.py
 node_modules
 server/app.db
 app/build
+userscript/solution.py
+userscript/a.out
+userscript/test
