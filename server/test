@@ -20,8 +20,18 @@ MOVE_REGEX='[0-9a-zA-Z]'
 while (( $# > 0 )); do
     case "$1" in
         start )
+            if (( $# < 6 )); then
+                echo "Usage: $0 start PORT team1 team2 ip1 ip2"
+                exit 1;
+            fi
             PORT="$2"
-            http -f POST https://threads.iiit.ac.in:"$PORT"/game/start p2=arpan p1=ishaan ip1=10.1.135.161 ip2=10.1.134.188 board_size=10
+            PL1="$3"
+            PL2="$4"
+            IP1="$5"
+            IP2="$6"
+            # 10.1.135.161
+            # 10.1.134.188
+            http -f POST https://threads.iiit.ac.in:"$PORT"/game/start p2="$PL2" p1="$PL1" ip1="$IP1" ip2="$IP2" board_size=10
             shift 2 ;;
         move )
             shift
