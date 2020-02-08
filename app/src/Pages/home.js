@@ -11,7 +11,7 @@ export default class Home extends React.Component {
 
     this.apiUrl = "https://threads.iiit.ac.in";
     this.timer = null;
-    this.pollInterval = 1000;
+    this.pollInterval = 3000;
   }
 
   componentDidMount() {

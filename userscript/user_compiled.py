@@ -43,9 +43,10 @@ if __name__ == "__main__":
             # call user binary here
             try:
                 subprocess.run('./a.out', timeout=3)
-                out = open('output.out', 'r')
-                r_pos = out.readline()[:-1]
-                c_pos = out.readline()
+                # out = open('output.out', 'r')
+                # r_pos = out.readline().rstrip('\n')
+                # c_pos = out.readline().rstrip('\n')
+                r_pos,c_pos = open('output.out').read().split('\n')[:2]
                 out.close()
                 data = {
                     'r_pos': int(r_pos),
