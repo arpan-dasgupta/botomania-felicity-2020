@@ -44,8 +44,8 @@ if __name__ == "__main__":
             try:
                 subprocess.run('./a.out', timeout=3)
                 out = open('output.out', 'r')
-                r_pos = out.readline()[0]
-                c_pos = out.readline()[0]
+                r_pos = out.readline()[:-1]
+                c_pos = out.readline()
                 out.close()
                 data = {
                     'r_pos': int(r_pos),
