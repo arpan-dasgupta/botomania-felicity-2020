@@ -4,9 +4,23 @@ import sys
 import time
 
 if __name__ == "__main__":
-    URL = "https://threads.iiit.ac.in:5005/game/get_status"
-    URL_POST = "https://threads.iiit.ac.in:5005/game/make_move"
-    player_id = 1
+    if len(sys.argv) != 3:
+        print("Incorrect number of arguments")
+        exit(1)
+
+    port = sys.argv[1]
+    player_id = sys.argv[2]
+
+    if port > 5009 or port < 5000:
+        print("Incorrect port")
+        exit(1)
+
+    if player_id < 1 or player_id > 2:
+        print("Incorrect player id")
+        exit(1)
+
+    URL = f"https://threads.iiit.ac.in:{port}/game/get_status"
+    URL_POST = f"https://threads.iiit.ac.in:{port}/game/make_move"
 
     # sending get request and saving the response as response object
     while(True):
