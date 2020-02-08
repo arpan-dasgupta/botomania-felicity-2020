@@ -30,7 +30,7 @@ class App extends React.Component {
                   <Link to="/" className="nav-link active">Home</Link>
                 </li>
                 <li>
-                  <Link to="/instructions" className="nav-link active">Instructions</Link>
+                  <a href="https://github.com/ishaanshah/Botomania-2020/blob/master/README.md" target="_blank" className="nav-link active">Instructions</a>
                 </li>
               </ul>
             </div>
@@ -41,8 +41,6 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/">
               <Home />
-            </Route>
-            <Route exact path="/instructions">
             </Route>
             <Route exact path="/test">
             </Route>

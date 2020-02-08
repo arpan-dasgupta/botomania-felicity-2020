@@ -22,8 +22,6 @@ export default class Home extends React.Component {
     clearInterval(this.timer);
   }
 
-
-  // TODO - Test this function
   poll = async () => {
     let ports = [5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009];
 
