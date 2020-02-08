@@ -8,8 +8,8 @@ if __name__ == "__main__":
         print("Incorrect number of arguments")
         exit(1)
 
-    port = sys.argv[1]
-    player_id = sys.argv[2]
+    port = int(sys.argv[1])
+    player_id = int(sys.argv[2])
 
     if port > 5009 or port < 5000:
         print("Incorrect port")
